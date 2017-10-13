@@ -1,10 +1,10 @@
 -- Periodic announcements and intro messages
 local intros = {
-  "Welcome to Factorio freeplay",
-  "Join discord for voice chat and admin support: https://discord.gg/hmwb3dB"
+  "Welcome to the Dangerous server!",
+  "Join Discord for voice chat and admin support: https://discord.gg/bNWqTNm"
 }
 local announcements = {
-  "Join discord for voice chat and admin support: https://discord.gg/hmwb3dB"
+  "Join Discord for voice chat and admin support: https://discord.gg/bNWqTNm"
 }
 
 -- Show introduction messages to players upon joining

@@ -12,12 +12,12 @@ Time_Rank = {}
 
 -- Regular player ranks (time in hrs)
 Time_Rank.RANKS = {
-  lvl1 = { time = 0,   color = Colors.lightgrey,   tag = "Commoner", },
-  lvl2 = { time = 1.5, color = Colors.lightyellow, tag = "Minion",   },
-  lvl3 = { time = 5,   color = Colors.green,       tag = "Hero",     },
-  lvl4 = { time = 10,  color = Colors.cyan,        tag = "Champion", },
-  lvl5 = { time = 30,  color = Colors.blue,        tag = "Elite",    },
-  lvl6 = { time = 60,  color = Colors.purple,      tag = "All-Star", },
+  lvl1 = { time = 0,   color = Colors.lightgrey,   tag = "Newcomer", },
+  lvl2 = { time = 0.16, color = Colors.lightyellow, tag = "Newcomer", },
+  lvl3 = { time = 1,   color = Colors.green,       tag = "", },
+  lvl4 = { time = 3,  color = Colors.cyan,        tag = "", },
+  lvl5 = { time = 9,  color = Colors.blue,        tag = "", },
+  lvl6 = { time = 10,  color = Colors.purple,      tag = "", },
 }
 
 

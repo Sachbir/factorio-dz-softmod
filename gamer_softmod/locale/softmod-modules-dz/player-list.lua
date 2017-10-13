@@ -10,7 +10,7 @@ require "locale/softmod-modules-util/Time"
 require "locale/softmod-modules-util/Time_Rank"
 require "locale/softmod-modules-util/Colors"
 
-local OWNER = "DDDGamer"
+local OWNER = "UberJuice"
 
 -- Roles
 local ROLES = {

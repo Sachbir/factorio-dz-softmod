@@ -22,7 +22,7 @@ end
 -- @param event on_player_respawned event
 function player_respawned(event)
   local player = game.players[event.player_index]
-  player.insert { name = "iron-axe",         count = 1  }
+  player.insert { name = "iron-axe",         count = 1 }
   player.insert { name = "pistol",           count = 1 }
   player.insert { name = "firearm-magazine", count = 10 }
 end

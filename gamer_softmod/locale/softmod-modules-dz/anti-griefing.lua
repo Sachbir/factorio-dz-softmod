@@ -19,7 +19,7 @@ function on_built_entity(event)
   local entity = event.created_entity
 
   if (not player.admin and 
-     Time.tick_to_hour(player.online_time) < time_regular_player) then
+     Time.tick_to_hour(player.online_time) < Time_Rank.RANKS.lvl3.time) then
      if (entity.type == "tile-ghost") then
       local entity_name = entity.ghost_name
       entity.destroy()
@@ -42,8 +42,8 @@ function on_preplayer_mined_item(event)
   local is_entity_ghost = entity.name == "entity-ghost"
 
   -- Check for allowed entities or admins and exit
-  if (player.admin and
-      entity.force.name == "neutral"
+  if (player.admin 
+      or entity.force.name == "neutral"
       -- Dont care about cars, robots or tile-ghosts
       or entity.name == "tile-ghost"
       or entity.type == "car"
@@ -56,9 +56,9 @@ function on_preplayer_mined_item(event)
   end
 
   -- If not a regular player and mining structure was built by another player
-  if (Time.tick_to_hour(player.online_time) < time_regular_player
-      and entity.last_user.name ~= player.name
-      ) then
+  if (not player.admin 
+      and Time.tick_to_hour(player.online_time) < Time_Rank.RANKS.lvl2.time
+      and entity.last_user.name ~= player.name) then
     -- ghost entity (re-create the ghost entity)
     if is_entity_ghost then
       entity_name = entity.ghost_name
@@ -153,7 +153,8 @@ function on_marked_for_deconstruction(event)
   end
 
   -- If not a regular player marking structure for deconstruction built by another player
-  if (Time.tick_to_hour(player.online_time) < time_regular_player) then
+  if (not player.admin 
+    and Time.tick_to_hour(player.online_time) < Time_Rank.RANKS.lvl3.time) then
     entity.cancel_deconstruction("player")
     player.print("Play more to unlock the use of deconstruction planner on structures built by others.")
     notify_admins(player.name .. " tried to use the deconstruction planner")
@@ -168,8 +169,9 @@ function on_player_rotated_entity(event)
   local player = game.players[event.player_index]
   local entity = event.entity
 
-  if (Time.tick_to_hour(player.online_time) < time_regular_player and
-      entity.last_user.name ~= player.name) then
+  if (not player.admin 
+    and Time.tick_to_hour(player.online_time) < Time_Rank.RANKS.lvl1.time 
+    and entity.last_user.name ~= player.name) then
       -- How to rotate back?
       -- player.print("Play more to unlock rotating structures built by others.")
       notify_admins(player.name .. " tried to rotate " .. entity.name)
@@ -190,6 +192,77 @@ function notify_admins(message)
     end
   end
 end
+
+
+
+
+
+-- Sachbir's code injection
+
+
+-- Prevents nuclear reactor from being mined
+-- Modified from code preventing new players from mining the structures of others
+function on_preplayer_mined_item(event)
+  local player = game.players[event.player_index]
+  local entity = event.entity
+  local entity_name = ""
+  local is_entity_ghost = entity.name == "entity-ghost"
+
+  -- If not an admin, not a regular player, and the entity is a nuclear reactor
+  if (not player.admin 
+      and Time.tick_to_hour(player.online_time) < Time_Rank.RANKS.lvl4.time
+      and entity.name == "nuclear-reactor") then
+
+      entity_name = entity.name
+      entity_player_name = entity.last_user.name
+      local replacement_entity = entity.surface.create_entity{
+        name=entity.name,
+        force=entity.force.name,
+        position=entity.position,
+        direction=entity.direction,
+        fast_replace=true,
+        spill=false
+      }
+      
+      -- Creation of new entity is successfull
+      if replacement_entity ~= nil then
+        -- Preserve the original entity creator when making the copy
+        replacement_entity.last_user = game.players[entity_player_name]
+        -- If the source entity is valid then coppy settings the the re-created copy (assembler/oil recipies, logic, etc...)
+        if entity ~= nil and entity.valid then
+          replacement_entity.copy_settings(entity)
+          -- Prevent infinite items, set to remove the item from inventory on mined event.
+          item_to_remove = {name=entity.name, count=1}
+        end
+      else
+      -- Creation of the entity was unccessesfull (usually with rails)
+        if entity ~= nil and entity.valid then
+          -- Regular replacement failed, resorting to ghost replacement
+          local ghost = entity.surface.create_entity{
+            name="entity-ghost",
+            force=entity.force,
+            inner_name=entity_name,
+            position=entity.position,
+            direction=entity.direction
+          }
+          ghost.last_user = game.players[entity_player_name]
+        end
+      end
+
+    -- Notifications
+    player.print("Play more to enable reactor manipulation.")
+    notify_admins(player.name .. " tried to mine " .. entity_name)
+    log("Warning: " .. player.name .. " tried to mine " .. entity_name)
+
+  end
+end
+
+
+--- End of Sachbir's code injection
+
+
+
+
 
 -- Event Handlers
 Event.register(defines.events.on_built_entity, on_built_entity)

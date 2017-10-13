@@ -22,13 +22,16 @@ require "locale/softmod-modules-dz/anti-griefing"
 require "locale/softmod-modules-dz/announcements"
 require "locale/softmod-modules-dz/player-list"
 require "locale/softmod-modules-dz/game-info"
-require "locale/softmod-modules-dz/tasks"
+-- require "locale/softmod-modules-dz/tasks"
 require "locale/softmod-modules-dz/show-health"
 require "locale/softmod-modules-vanilla/rocket-vanilla"
 
+-- Import Mewmew's Modules
+require "locale/softmod-modules-mewmew/poll"
+
 -- Import 3Ra Soft-Mod Modules
 require "locale/softmod-modules-3ra/undecorator"
-require "locale/softmod-modules-3ra/gravestone"
+-- require "locale/softmod-modules-3ra/gravestone"
 -- require "locale/softmod-modules-3ra/rocket"
 -- require "locale/softmod-modules-3ra/bot"
 -- require "locale/softmod-modules-3ra/autodeconstruct"

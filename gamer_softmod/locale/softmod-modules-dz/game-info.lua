@@ -17,7 +17,7 @@ local MASTER_FRAME = { name = "frame_readme" }
 -- Tabs and the corresponding buttons to but in the master frame
 local FRAME_TABS = {
   rules = {
-    btn = { name = "btn_readme_rules",     caption = "Guidelines",  tooltip = "" },
+    btn = { name = "btn_readme_rules",     caption = "Rules",  tooltip = "" },
     win = { name = "win_readme_rules"},
   },
   comm = {
@@ -28,10 +28,12 @@ local FRAME_TABS = {
     btn = { name = "btn_readme_resources", caption = "Resources",   tooltip = "" },
     win = { name = "win_readme_resources"},
   },
-  players = {
+  --[[
+ players = {
     btn = { name = "btn_readme_players",   caption = "All Players", tooltip = "" },
     win = { name = "win_readme_players"},
   },
+  --]]
   close = {
     btn = { name = "btn_readme_close",     caption = "Close",       tooltip = "" },
     win = { name = "win_readme_close"}, -- no window created, just for consistency to use in loop
@@ -41,35 +43,43 @@ local FRAME_TABS = {
 -- Static Content
 local CONTENT = {
   rules = {
+    "=== RULES ===",
+    "* 1) No griefing",
+    "* 2) No spamming or advertising (eg. other servers)",
+    "* 3) You must respond to admins if addressed",
+    "* 4) Be civil", 
+    "",
     "=== GUIDELINES ===",
-    "* Griefing is not tolorated - instant ban",
-    "* Do your best to build cleanly: avoid spaghetti factories (except temp builds)",
-    "* Do not spam: chat spam, item/chest spam, concrete/brick spam, etc...",
-    "* Use brick/concrete for roads, don't spam whole base (increases pollution)",
-    "* Use Lights",
-    "* Barrel the oil",
-    "* Don't spam fluid tanks (1 of each is enough)",
-    "* Limit the chests!!!",
-    "* Do not make train roundabouts, junctions only",
-    "* RHD (Right Hand Drive)",
-    "* Do not walk in a random direction for no reason (to save map size)",
+    "* Play well with others",
+    "* Build cleanly",
+    "* Try to keep the map size small",
+    "* Use bricks/concrete appropriately; don't 'Pave the world'",
+    "* Use lights",
+    "* LIMIT THE CHESTS",
+    "",
+    "=== TRAINS ===",
+    "* Right-Hand Drive",
+    "* No Roundabouts",
+    "",
+    "",
+    "",
+    "",
+    "",
     "* Check the tasklist for things that need doing, update as needed",
   },
   comm = {
     "=== SOCIAL/COMMUNICATION ===",
     "* Chat using the lua console (toggle with TILDE (~) key under the ESC key)",
     "",
-    "* Join discord for discussion, voice chat and admin support:",
-    "  https://discord.gg/hmwb3dB",
-    "",
-    "* Visit the youtube page for tutorials and letsplays:",
-    "  https://www.youtube.com/channel/UCUrxnam98XPOY6xpP7WBKXg",
-    "  or search 'DDDGamer Lp'",
+    "* Join our Discord to keep in touch and voice opinions for the next world!",
+    "  https://discord.gg/bNWqTNm",
   },
   resources = {
     "=== RESOURCES ===",
     "* Ratio Calculator: http://doomeer.com/factorio/",
     "* Cheat Sheet: https://docs.google.com/presentation/d/1wIexilsTFKRbMIWc1MOY5XaAOPwNEU0AGMbSTAwqa3Q/",
+    "",
+    "If you know of any others, please let us know!!",
   },
 }
 
@@ -156,8 +166,10 @@ function draw_master_readme_frame(player, window_name)
     elseif window_name == FRAME_TABS.resources.win.name then
       draw_static_content( player.gui.center[MASTER_FRAME.name]["scroll_content"], CONTENT.resources)
     -- Players
+    --[[
     elseif window_name == FRAME_TABS.players.win.name then
       draw_players( player.gui.center[MASTER_FRAME.name]["scroll_content"])
+    --]]
     -- Close
     elseif window_name == FRAME_TABS.close.win.name then
       GUI.toggle_element(  player.gui.center[MASTER_FRAME.name])
@@ -170,13 +182,13 @@ function draw_master_readme_frame(player, window_name)
     -- make a tab content container
     frame.add { type = "scroll-pane", name = "scroll_content", direction = "vertical", vertical_scroll_policy = "always", horizontal_scroll_policy = "auto" }
     -- Style config for nav
-    frame.readme_nav.style.maximal_width = 600;
-    frame.readme_nav.style.minimal_width = 600;
+    frame.readme_nav.style.maximal_width = 500;
+    frame.readme_nav.style.minimal_width = 500;
     -- Style config for content
-    frame.scroll_content.style.maximal_height = 400;
-    frame.scroll_content.style.minimal_height = 400;
-    frame.scroll_content.style.maximal_width  = 600;
-    frame.scroll_content.style.minimal_width  = 600;
+    frame.scroll_content.style.maximal_height = 600;
+    frame.scroll_content.style.minimal_height = 600;
+    frame.scroll_content.style.maximal_width  = 500;
+    frame.scroll_content.style.minimal_width  = 500;
     -- Recursive call
     draw_master_readme_frame(player, window_name)
   end
