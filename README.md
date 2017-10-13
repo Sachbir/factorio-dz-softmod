@@ -1,8 +1,12 @@
-# Factorio Soft Mod
+# Factorio Soft Mod - DDDGamer
 
-My custom factorio soft mod
+This is a Factorio softmod entirely made by DDDGamer. I am merely learning form his code, and tweaking it somewhat to suit my needs. 
+I'm new to GitHub, so please let me know if I've messed up on the etiquette. 
 
-* Player list sidebar to show who is playing, how long have they played, and assigns vidual rank based on gametime
+
+
+----------
+
 
 
 # What is a soft mod?
@@ -50,3 +54,5 @@ A modification to the `control.lua` file.
 * [https://github.com/3RaGaming/3Ra-Enhanced-Vanilla](https://github.com/3RaGaming/3Ra-Enhanced-Vanilla)
 * [Explosive Gaming Forums](https://explosivegaming.nl/topic/62/factorio-server-technical-query)
 * Thanks to **CoolDude2606** from explosive gaming for getting me started.
+
+* And of course, **DDDGamer**
