@@ -56,3 +56,4 @@ A modification to the `control.lua` file.
 * Thanks to **CoolDude2606** from explosive gaming for getting me started.
 
 * And of course, **DDDGamer**
+* Also stole some code from **MewMew**
